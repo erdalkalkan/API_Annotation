@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
         },
         monochrome = true,
         features = "./src/test/resources/features",
-        glue = {"stepdefinitions"},
+        glue = {"stepDefinitions"},
         dryRun = false,
-        tags = "@US"
+        tags = "@API"
 )
 public class Runner {
 }
