@@ -19,7 +19,10 @@ public class APIUtilities {
                 .when()
                 .post("https://hyrai.com/api/login");
 
-        return response.cookie("MOCKSESSID");
+
+        String MOCKSESSID = "MOCKSESSID=" + response.cookie("MOCKSESSID");
+
+        return MOCKSESSID;
     }
 
     public static void statusCodeAssertion(int statusCode){
