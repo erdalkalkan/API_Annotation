@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static stepdefinitions.Hooks.driver;
+import static stepDefinitions.Hooks.driver;
 
 public class ReusableMethods {
 
