@@ -1,9 +1,12 @@
 package stepDefinitions;
 
 
+import enums.USERINFO;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +15,16 @@ import org.openqa.selenium.interactions.Actions;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import static enums.USERINFO.*;
 import static io.restassured.RestAssured.given;
 
 public class Hooks {
+
+
+    Response response;
+
+    public static String MOCKSESSID;
+
     public static WebDriver driver;
 
     public static Actions actions;
@@ -79,6 +89,34 @@ public class Hooks {
 
 
 
+    @Before("@CANDIDATE_ERDAL1")
+    public void CANDIDATE_ERDAL1(){
+        getMOCKSESSID(CANDIDATE_ERDAL1);
+    }
+
+    @Before("@CANDIDATE_ERDAL2")
+    public void CANDIDATE_ERDAL2(){
+        getMOCKSESSID(CANDIDATE_ERDAL2);
+    }
+
+
+       public String getMOCKSESSID(USERINFO userinfo){
+
+           response = given()
+                   .contentType(ContentType.JSON)
+                   .body("{\n" +
+                           "    \"email\": \""+userinfo.getEmail()+"\",\n" +
+                           "    \"password\": \""+userinfo.getPassword()+"\",\n" +
+                           "    \"state\": \""+userinfo.getState()+"\"\n" +
+                           "}")
+                   .when()
+                   .post("https://hyrai.com/api/login");
+
+           MOCKSESSID = "MOCKSESSID=" + response.cookie("MOCKSESSID");
+
+           return MOCKSESSID;
+
+       }
 
 
 

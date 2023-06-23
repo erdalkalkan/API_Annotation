@@ -12,6 +12,42 @@ import static stepDefinitions.Hooks.*;
 public class APIUtilities {
 
     static Response response;
+
+    public static String getMOCKID(){
+
+        response = given()
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"email\": \"erdal@yopmail.com\",\n" +
+                        "    \"password\": \"123123\",\n" +
+                        "    \"state\": \"candidate\"\n" +
+                        "}")
+                .when()
+                .post("https://hyrai.com/api/login");
+
+        String MOCKSESSID = "MOCKSESSID=" + response.cookie("MOCKSESSID");
+
+        return MOCKSESSID;
+    }
+
+
+    public static String getMOCKID2(){
+
+        response = given()
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"email\": \"erdal@yopmail.com\",\n" +
+                        "    \"password\": \"1230123\",\n" +
+                        "    \"state\": \"candidate\"\n" +
+                        "}")
+                .when()
+                .post("https://hyrai.com/api/login");
+
+        String MOCKSESSID = "MOCKSESSID=" + response.cookie("MOCKSESSID");
+
+        return MOCKSESSID;
+    }
+
     public static String getMockSessionIdMap(Map<String, String> mapBody) {
         response = given()
                 .contentType(ContentType.JSON)
